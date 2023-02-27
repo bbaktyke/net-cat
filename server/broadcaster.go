@@ -9,10 +9,10 @@ func broadcastMessage() {
 			mutex.Lock()
 			for _, user := range openConnections {
 				if user.Name != msg.UserName {
-					hst := fmt.Sprintf("\n[%s][%s]: %s", msg.time, msg.UserName, msg.msg)
-					history = append(history, hst)
 					fmt.Fprintf(user.Conn, "\n[%s][%s]:%s\n", msg.time, msg.UserName, msg.msg)
 				}
+				hst := fmt.Sprintf("\n[%s][%s]: %s", msg.time, msg.UserName, msg.msg)
+				history = append(history, hst)
 				fmt.Fprintf(user.Conn, "[%s][%s]:", msg.time, user.Name)
 			}
 			mutex.Unlock()
